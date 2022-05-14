@@ -9,6 +9,6 @@ on:
 
 jobs:
   build:
-    - uses: ./.github/workflows/install-dotnet
-      with:
-        version: 6.0.x
+    uses: ./.github/workflows/install-dotnet
+    with:
+      version: 6.0.x

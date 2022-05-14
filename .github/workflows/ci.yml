@@ -9,6 +9,6 @@ on:
 
 jobs:
   build:
-    - uses: ./.github/workflow-templates/install-dotnet.yml
+    - uses: ./.github/workflows/install-dotnet.yml
       with:
         version: 6.0.x

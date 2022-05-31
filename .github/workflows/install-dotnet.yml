@@ -22,3 +22,11 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+    - name: Report Test Results
+      uses: dorny/test-reporter@v1
+      if: ${{ always() }}
+      with:
+        name: Sample Lib Test Results
+        path: ./TestResults/*.trx
+        reporter: dotnet-trx

@@ -35,8 +35,9 @@ jobs:
       run: dotnet tool install --global NuGetKeyVaultSignTool
 
     - name: Sign NuGet Packages
+      working-directory: Artifacts/
       run: |
-        NuGetKeyVaultSignTool sign ./Artifacts/*.nupkg --file-digest sha256 `
+        NuGetKeyVaultSignTool sign *.nupkg --file-digest sha256 `
           --timestamp-digest sha256 `
           --azure-key-vault-url ${{ secrets.CodeSignKeyVault }} `
           --azure-key-vault-client-id ${{ secrets.CodeSignClientId }} `

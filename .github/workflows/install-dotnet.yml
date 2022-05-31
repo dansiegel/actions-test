@@ -31,9 +31,11 @@ jobs:
     #     path: ./TestResults/*.trx
     #     reporter: dotnet-trx
 
+    - name: Install NuGetKeyVaultSignTool
+      run: dotnet tool install --global NuGetKeyVaultSignTool
+
     - name: Sign NuGet Packages
       run: |
-        dotnet tool install --global NuGetKeyVaultSignTool
         NuGetKeyVaultSignTool sign ./Artifacts/*.nupkg --file-digest sha256 `
           --timestamp-digest sha256 `
           --azure-key-vault-url ${{ secrets.CodeSignKeyVault }} `

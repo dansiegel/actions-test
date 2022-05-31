@@ -23,10 +23,32 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
 
-    - name: Report Test Results
-      uses: dorny/test-reporter@v1
-      if: ${{ always() }}
-      with:
-        name: Sample Lib Test Results
-        path: ./TestResults/*.trx
-        reporter: dotnet-trx
+    # - name: Report Test Results
+    #   uses: dorny/test-reporter@v1
+    #   if: ${{ always() }}
+    #   with:
+    #     name: Sample Lib Test Results
+    #     path: ./TestResults/*.trx
+    #     reporter: dotnet-trx
+
+    - name: Sign NuGet Packages
+      run: |
+        dotnet tool install --global NuGetKeyVaultSignTool
+        NuGetKeyVaultSignTool sign ./Artifacts/*.nupkg `
+          --file-digest sha256 `
+          --timestamp-rfc3161 ${{ secrets.CodeSignTimestampUrl }} `
+          --timestamp-digest sha256 `
+          --azure-key-vault-url ${{ secrets.CodeSignKeyVault }} `
+          --azure-key-vault-client-id ${{ secrets.CodeSignClientId }} `
+          --azure-key-vault-tenant-id ${{ secrets.CodeSignTenantId }} `
+          --azure-key-vault-client-secret ${{ secrets.CodeSignClientSecret }} `
+          --azure-key-vault-certificate ${{ secrets.CodeSignCertificate }}
+        NuGetKeyVaultSignTool sign ./Artifacts/*.snupkg `
+          --file-digest sha256 `
+          --timestamp-rfc3161 ${{ secrets.CodeSignTimestampUrl }} `
+          --timestamp-digest sha256 `
+          --azure-key-vault-url ${{ secrets.CodeSignKeyVault }} `
+          --azure-key-vault-client-id ${{ secrets.CodeSignClientId }} `
+          --azure-key-vault-tenant-id ${{ secrets.CodeSignTenantId }} `
+          --azure-key-vault-client-secret ${{ secrets.CodeSignClientSecret }} `
+          --azure-key-vault-certificate ${{ secrets.CodeSignCertificate }}

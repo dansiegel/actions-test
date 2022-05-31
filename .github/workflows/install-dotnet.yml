@@ -42,3 +42,9 @@ jobs:
           --azure-key-vault-client-secret ${{ secrets.CodeSignClientSecret }} `
           --azure-key-vault-certificate ${{ secrets.CodeSignCertificate }} `
           --timestamp-rfc3161 ${{ secrets.CodeSignTimestampUrl }}
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: NuGet
+        path: Artifacts/

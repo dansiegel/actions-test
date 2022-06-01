@@ -12,4 +12,13 @@
     <VSTestLogger>trx%3bLogFileName=$(MSBuildProjectName).trx</VSTestLogger>
     <VSTestResultsDirectory>$(MSBuildThisFileDirectory)TestResults</VSTestResultsDirectory>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning" 
+                      Version="3.5.107"
+                      PrivateAssets="all" />
+    <!-- <PackageReference Include="Microsoft.SourceLink.GitHub"
+                      Version="1.1.1"
+                      PrivateAssets="all" /> -->
+  </ItemGroup>
 </Project>

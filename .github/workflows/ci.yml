@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    uses: ./.github/actions/install-dotnet.yml
+    uses: ./.github/actions/install-dotnet.yml@master
     with:
       version: 6.0.x
     secrets: inherit

@@ -34,6 +34,5 @@ jobs:
         title: ${{ env.ReleaseDisplayName }}
         draft: true
         files: |
-          *.nupkg
-          *.snupkg
-      working-directory: Artifacts/
+          Artifacts/*.nupkg
+          Artifacts/*.snupkg

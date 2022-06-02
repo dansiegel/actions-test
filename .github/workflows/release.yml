@@ -28,7 +28,7 @@ jobs:
         version: latest
         path: Artifacts/
 
-    - run: perl ./build/process-version.pl SampleLib
+    - run: perl ../build/process-version.pl SampleLib
       id: process-version
       name: Process Version
       working-directory: Artifacts/

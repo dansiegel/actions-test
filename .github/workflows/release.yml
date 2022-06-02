@@ -37,6 +37,8 @@ jobs:
       with:
         # artifacts: "Artifacts/*.nupkg,Artifacts/*.snupkg"
         # artifactErrorsFailBuild: true
+        owner: dansiegel
+        repo: actions-test
         draft: true
         generateReleaseNotes: true
         name: '${{ steps.process-version.outputs.release-display-name }}'

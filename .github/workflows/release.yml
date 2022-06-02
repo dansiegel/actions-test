@@ -35,13 +35,13 @@ jobs:
     - uses: ncipollo/release-action@main
       name: Create Release
       with:
-        artifacts: "Artifacts/*.nupkg,Artifacts/*.snupkg"
-        artifactErrorsFailBuild: true
+        # artifacts: "Artifacts/*.nupkg,Artifacts/*.snupkg"
+        # artifactErrorsFailBuild: true
         draft: true
         generateReleaseNotes: true
-        name: ${{ steps.process-version.outputs.release-display-name }}
-        prerelease: ${{ steps.process-version.outputs.is-preview }}
-        tag: ${{ steps.process-version.outputs.version-name }}
+        name: '${{ steps.process-version.outputs.release-display-name }}'
+        prerelease: '${{ steps.process-version.outputs.is-preview }}'
+        tag: '${{ steps.process-version.outputs.version-name }}'
 
     # - uses: dansiegel/action-automatic-releases@master
     #   with:

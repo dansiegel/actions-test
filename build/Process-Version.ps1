@@ -17,10 +17,10 @@ try {
 
     if($null -eq $env:IS_PREVIEW)
     {
-        Write-Output "::set-output name=IsPreview::""$true"""
+        Write-Host "::set-output name=IsPreview::""$true"""
     }
     else {
-        Write-Output "::set-output name=IsPreview::""$false"""
+        Write-Host "::set-output name=IsPreview::""$false"""
     }
 
     if($true -eq $IsPreview)
@@ -32,8 +32,8 @@ try {
     Write-Host "Version Name - $VersionName"
     Write-Host "Release Display Name - $ReleaseDisplayName"
 
-    Write-Output "::set-output name=VersionName::""$VersionName"""
-    Write-Output "::set-output name=ReleaseDisplayName::""$ReleaseDisplayName"""
+    Write-Host "::set-output name=VersionName::""$VersionName"""
+    Write-Host "::set-output name=ReleaseDisplayName::""$ReleaseDisplayName"""
 }
 catch {
     Write-Error $_

@@ -13,10 +13,6 @@ jobs:
     runs-on: windows-latest
     needs: [build]
     name: Release
-    env:
-      IsPreview: false
-      VersionName: '1.0.0'
-      ReleaseDisplayName: Version 1.0.0
     steps:
     - uses: actions/checkout@v2
       with:

@@ -26,6 +26,7 @@ jobs:
 
     - run: ./build/Process-Version.ps1
       name: Process Version
+      shell: powershell
 
     - uses: marvinpinto/action-automatic-releases@latest
       with:

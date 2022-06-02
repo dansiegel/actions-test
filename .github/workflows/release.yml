@@ -28,9 +28,10 @@ jobs:
         version: latest
         path: Artifacts/
 
-    - run: ./build/process-version.pl
+    - run: perl ./build/process-version.pl SampleLib
       id: process-version
       name: Process Version
+      working-directory: Artifacts/
 
     - uses: dansiegel/action-automatic-releases@master
       with:

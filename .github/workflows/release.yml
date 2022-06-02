@@ -30,6 +30,7 @@ jobs:
         path: Artifacts/
 
     - run: perl ../build/process-version.pl SampleLib
+      shell: bash
       id: process-version
       name: Process Version
       working-directory: Artifacts/

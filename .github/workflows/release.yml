@@ -1,0 +1,39 @@
+name: Start Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/install-dotnet.yml
+    with:
+      version: 6.0.x
+    secrets: inherit
+
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        clean: true
+
+    - uses: actions/download-artifact@v2
+      with:
+        name: NuGet
+        version: latest
+        path: Artifacts/
+
+    - run: ./build/Process-Version.ps1
+      name: Process Version
+
+    - uses: marvinpinto/action-automatic-releases@latest
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        automatic_release_tag: ${{ env.VersionName }}
+        prerelease: ${{ env.IsPreview }}
+        title: ${{ env.ReleaseDisplayName }}
+        draft: true
+        files: |
+          *.nupkg
+          *.snupkg
+      working-directory: Artifacts/

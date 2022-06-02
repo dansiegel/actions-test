@@ -33,7 +33,7 @@ jobs:
       name: Process Version
       shell: powershell
 
-    - uses: marvinpinto/action-automatic-releases@latest
+    - uses: dansiegel/action-automatic-releases@master
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         automatic_release_tag: ${{ steps.process-version.outputs.version-name }}

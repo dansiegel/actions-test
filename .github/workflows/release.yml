@@ -13,6 +13,10 @@ jobs:
     runs-on: windows-latest
     needs: [build]
     name: Release
+    outputs:
+      version-name: ${{ steps.process-version.outputs.version-name }}
+      release-display-name: ${{ steps.process-version.outputs.release-display-name }}
+      is-preview: ${{ steps.process-version.outputs.is-preview }}
     steps:
     - uses: actions/checkout@v2
       with:
@@ -25,15 +29,16 @@ jobs:
         path: Artifacts/
 
     - run: ./build/Process-Version.ps1
+      id: process-version
       name: Process Version
       shell: powershell
 
     - uses: marvinpinto/action-automatic-releases@latest
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        automatic_release_tag: ${{ env.VersionName }}
-        prerelease: ${{ env.IsPreview }}
-        title: ${{ env.ReleaseDisplayName }}
+        automatic_release_tag: ${{ steps.process-version.outputs.version-name }}
+        prerelease: ${{ steps.process-version.outputs.is-preview }}
+        title: ${{ steps.process-version.outputs.release-display-name }}
         draft: true
         files: |
           Artifacts/*.nupkg

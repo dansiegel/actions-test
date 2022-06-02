@@ -33,13 +33,24 @@ jobs:
       name: Process Version
       working-directory: Artifacts/
 
-    - uses: dansiegel/action-automatic-releases@master
+    - uses: ncipollo/release-action@v1
+      name: Create Release
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        automatic_release_tag: ${{ steps.process-version.outputs.version-name }}
-        prerelease: ${{ steps.process-version.outputs.is-preview }}
-        title: ${{ steps.process-version.outputs.release-display-name }}
+        artifacts: "Artifacts/*.nupkg,Artifacts/*.snupkg"
+        artifactErrorsFailBuild: true
         draft: true
-        files: |
-          Artifacts/*.nupkg
-          Artifacts/*.snupkg
+        generateReleaseNotes: true
+        name: ${{ steps.process-version.outputs.release-display-name }}
+        prerelease: ${{ steps.process-version.outputs.is-preview }}
+        tag: ${{ steps.process-version.outputs.version-name }}
+
+    # - uses: dansiegel/action-automatic-releases@master
+    #   with:
+    #     repo_token: ${{ secrets.GITHUB_TOKEN }}
+    #     automatic_release_tag: ${{ steps.process-version.outputs.version-name }}
+    #     prerelease: ${{ steps.process-version.outputs.is-preview }}
+    #     title: ${{ steps.process-version.outputs.release-display-name }}
+    #     draft: true
+    #     files: |
+    #       Artifacts/*.nupkg
+    #       Artifacts/*.snupkg

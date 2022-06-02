@@ -17,10 +17,10 @@ try {
 
     if($null -eq $env:IS_PREVIEW)
     {
-        [System.Environment]::SetEnvironmentVariable('IsPreview',$true)
+        Write-Output "::set-output name=IsPreview::""$true"""
     }
     else {
-        [System.Environment]::SetEnvironmentVariable('IsPreview',$false)
+        Write-Output "::set-output name=IsPreview::""$false"""
     }
 
     if($true -eq $IsPreview)
@@ -31,9 +31,9 @@ try {
 
     Write-Host "Version Name - $VersionName"
     Write-Host "Release Display Name - $ReleaseDisplayName"
-    
-    [System.Environment]::SetEnvironmentVariable('VersionName',$VersionName)
-    [System.Environment]::SetEnvironmentVariable('ReleaseDisplayName',$ReleaseDisplayName)
+
+    Write-Output "::set-output name=VersionName::""$VersionName"""
+    Write-Output "::set-output name=ReleaseDisplayName::""$ReleaseDisplayName"""
 }
 catch {
     Write-Error $_

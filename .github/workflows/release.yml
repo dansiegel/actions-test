@@ -25,7 +25,6 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: NuGet
-        version: latest
         path: Artifacts/
 
     - run: perl ../build/process-version.pl SampleLib
@@ -33,7 +32,7 @@ jobs:
       name: Process Version
       working-directory: Artifacts/
 
-    - uses: ncipollo/release-action@v1
+    - uses: ncipollo/release-action@main
       name: Create Release
       with:
         artifacts: "Artifacts/*.nupkg,Artifacts/*.snupkg"

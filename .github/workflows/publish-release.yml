@@ -21,7 +21,7 @@ jobs:
       #     token: ${{ secrets.GITHUB_TOKEN }}
 
       - run: |
-          echo "GitHub Refs"
-          echo ${{ github.refs }}
-
+          echo "GitHub Refs: ${{ github.ref }}"
+          echo "Tag name: ${{ github.event.release.tag_name }}"
+          echo "Assets url: ${{ github.event.release.assets_url }}"
         shell: bash

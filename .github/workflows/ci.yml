@@ -6,6 +6,7 @@ on:
     paths-ignore:
     - '*.md'
     - '.github/workflows/release.yml'
+    - '.github/workflows/publish-release.yml'
     - 'build/*'
   pull_request:
     branches: [ master ]

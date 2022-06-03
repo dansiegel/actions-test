@@ -1,0 +1,27 @@
+name: Publish SampleLib Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-release:
+    name: NuGet Publish
+    runs-on: windows-latest
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
+    steps:
+      - uses: robinraju/release-downloader@v1.3
+        with:
+          latest: true
+          fileName: "*"
+          out-file-path: "Artifacts/"
+
+      - run: |
+          echo "Root Directory:"
+          ls
+
+          cd Artifacts/
+          echo "Artifacts Directory:"
+          ls

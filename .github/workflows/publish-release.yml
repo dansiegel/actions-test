@@ -12,16 +12,19 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
     steps:
-      # - uses: robinraju/release-downloader@main
-      #   with:
-      #     repository: ${{ github.repository }}
-      #     latest: true
-      #     fileName: "*"
-      #     out-file-path: "Artifacts/"
-      #     token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: robinraju/release-downloader@main
+        with:
+          repository: ${{ github.repository }}
+          tag: ${{ github.event.release.tag_name }}
+          fileName: "*"
+          out-file-path: "Artifacts/"
+          tarBall: false
+          zipBall: false
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - run: |
           echo "GitHub Refs: ${{ github.ref }}"
           echo "Tag name: ${{ github.event.release.tag_name }}"
           echo "Assets url: ${{ github.event.release.assets_url }}"
+          ls
         shell: bash

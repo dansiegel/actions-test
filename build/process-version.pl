@@ -19,6 +19,10 @@ for my $i (@files) {
     }
 }
 
+if($gitTag eq "" or $version eq "") {
+    die "Could not find version information";
+}
+
 if($preview eq "") {
     print "::set-output name=is-preview::false\n";
     print "::set-output name=release-display-name::$version\n";

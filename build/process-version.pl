@@ -20,16 +20,16 @@ for my $i (@files) {
 }
 
 if($preview eq "") {
-    print "::set-output name=is-preview::\"false\"\n";
+    print "::set-output name=is-preview::false\n";
     print "::set-output name=release-display-name::$version\n";
 } elsif($preview =~ m/alpha/) {
-    print "::set-output name=is-preview::\"true\"\n";
+    print "::set-output name=is-preview::true\n";
     print "::set-output name=release-display-name::$version - Alpha\n";
 } elsif($preview =~ m/beta/) {
-    print "::set-output name=is-preview::\"true\"\n";
+    print "::set-output name=is-preview::true\n";
     print "::set-output name=release-display-name::$version - Beta\n";
 } else {
-    print "::set-output name=is-preview::\"true\"\n";
+    print "::set-output name=is-preview::true\n";
     print "::set-output name=release-display-name::$version - Preview\n";
 }
 

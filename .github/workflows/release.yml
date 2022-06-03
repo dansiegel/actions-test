@@ -40,7 +40,7 @@ jobs:
       with:
         artifacts: "Artifacts/*.nupkg,Artifacts/*.snupkg"
         artifactErrorsFailBuild: true
-        draft: true
+        draft: false
         generateReleaseNotes: true
         name: ${{ steps.process-version.outputs.release-display-name }}
         prerelease: ${{ steps.process-version.outputs.is-preview }}

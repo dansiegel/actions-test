@@ -18,7 +18,7 @@ jobs:
           latest: true
           fileName: "*"
           out-file-path: "Artifacts/"
-          # token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - run: |
           echo "Root Directory:"

@@ -88,10 +88,6 @@ on:
         description: The name of the certificate to use to code sign the build.
         required: false
 
-permissions:
-  statuses: write
-  checks: write
-
 jobs:
   deploy:
     runs-on: ${{ inputs.runs-on }}
@@ -139,6 +135,9 @@ jobs:
       - name: Report Test Results
         if: ${{ inputs.run-tests }}
         uses: dorny/test-reporter@main
+        permissions:
+          statuses: write
+          checks: write
         with:
           name: ${{ inputs.name }} Tests
           path: ${{ inputs.test-result-path }}

@@ -3,16 +3,23 @@ name: Demo Build
 on:
   push:
     branches: [ master ]
-    paths-ignore:
-    - '*.md'
-    - '.github/workflows/release.yml'
-    - '.github/workflows/publish-release.yml'
-    - 'build/*'
+    paths-include: [ "SampleLib/**", "SampleLib.Tests/**", ".github/workflows/ci.yml" ]
   pull_request:
     branches: [ master ]
+    paths-include: [ "SampleLib/**", "SampleLib.Tests/**", ".github/workflows/ci.yml" ]
   workflow_dispatch:
 
 jobs:
   build:
-    uses: ./.github/workflows/install-dotnet.yml
-    secrets: inherit
+    uses: ./.github/workflows/dotnet-build.yml
+    with:
+      install-workload: maui
+      solution-path: SampleLib.sln
+      run-tests: true
+      code-sign: true
+    secrets:
+      codeSignKeyVault: ${{ secrets.CODESIGNKEYVAULT}}
+      codeSignClientId: ${{ secrets.CODESIGNCLIENTID}}
+      codeSignTenantId: ${{ secrets.CODESIGNTENANTID}}
+      codeSignClientSecret: ${{ secrets.CODESIGNCLIENTSECRET}}
+      codeSignCertificate: ${{ secrets.CODESIGNCERTIFICATE}}

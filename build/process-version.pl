@@ -12,14 +12,15 @@ my $name = $ARGV[0];
 
 my ($gitTag, $version, $preview);
 for my $i (@files) {
-    if($i =~ /$name\.((\d+\.\d+\.\d+)(-[a-zA-Z0-9]+)?)\.nupkg$/) {
+    if($i =~ /$name\.((\d+\.\d+\.\d+)(\-[a-zA-Z0-9\-\.]+)?)\.nupkg$/) {
         $gitTag = $1;
         $version = $2;
         $preview = $3;
+        last;
     }
 }
 
-if($gitTag eq "" or $version eq "") {
+if(not defined $gitTag or not defined $version) {
     die "Could not find version information";
 }
 

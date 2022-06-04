@@ -1,0 +1,8 @@
+<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;xamarin.ios10;MonoAndroid10.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+</Project>

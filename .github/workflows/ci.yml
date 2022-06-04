@@ -28,3 +28,10 @@ jobs:
       codeSignTenantId: ${{ secrets.CODESIGNTENANTID}}
       codeSignClientSecret: ${{ secrets.CODESIGNCLIENTSECRET}}
       codeSignCertificate: ${{ secrets.CODESIGNCERTIFICATE}}
+
+  classicBuild:
+    uses: ./.github/workflows/msbuild-build.yml
+    with:
+      name: XPlatLib
+      solution-path: XPlatLib/XPlatLib.csproj
+      artifact-name: XPlatLib-NuGet

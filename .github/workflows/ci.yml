@@ -13,6 +13,7 @@ jobs:
   build:
     uses: ./.github/workflows/dotnet-build.yml
     with:
+      name: Sample Lib
       install-workload: maui
       solution-path: SampleLib.sln
       run-tests: true

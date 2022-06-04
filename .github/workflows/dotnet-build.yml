@@ -131,7 +131,6 @@ jobs:
       - name: Report Test Results
         if: ${{ inputs.run-tests }}
         uses: dorny/test-reporter@v1
-        if: ${{ always() }}
         with:
           name: ${{ inputs.name }} Tests
           path: ${{ inputs.test-result-path }}

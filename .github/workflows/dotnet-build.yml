@@ -67,7 +67,6 @@ on:
         required: false
       codeSignTimestampUrl:
         description: The url to the timestamp server.
-        default: https://timestamp.digicert.com
         required: false
       codeSignKeyVault:
         description: The name of the Azure KeyVault to use.
@@ -141,12 +140,17 @@ jobs:
 
       - name: Sign NuGet Packages
         if: ${{ inputs.code-sign }}
+        shell: pwsh
         working-directory: ${{ inputs.artifacts-path }}
         run: |
           dotnet tool install --global NuGetKeyVaultSignTool
+          $timestampUrl = "${{ secrets.codeSignTimestampUrl }}"
+          if ($timestampUrl -eq '') {
+            $timestampUrl = 'http://timestamp.digicert.com'
+          }
           NuGetKeyVaultSignTool sign *.nupkg `
             --file-digest sha256 `
-            --timestamp-rfc3161 '${{ secrets.codeSignTimestampUrl }}' `
+            --timestamp-rfc3161 $timestampUrl `
             --timestamp-digest sha256 `
             --azure-key-vault-url '${{ secrets.codeSignKeyVault }}' `
             --azure-key-vault-client-id '${{ secrets.codeSignClientId }}' `
@@ -155,7 +159,7 @@ jobs:
             --azure-key-vault-certificate '${{ secrets.codeSignCertificate }}'
           NuGetKeyVaultSignTool sign *.snupkg `
             --file-digest sha256 `
-            --timestamp-rfc3161 '${{ secrets.codeSignTimestampUrl }}' `
+            --timestamp-rfc3161 $timestampUrl `
             --timestamp-digest sha256 `
             --azure-key-vault-url '${{ secrets.codeSignKeyVault }}' `
             --azure-key-vault-client-id '${{ secrets.codeSignClientId }}' `

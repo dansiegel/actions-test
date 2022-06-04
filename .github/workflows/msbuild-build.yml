@@ -17,6 +17,15 @@ on:
         description: The name of the workload to install.
         required: false
         default: ''
+      vs-version:
+        type: string
+        description: The version of Visual Studio to use.
+        required: false
+      vs-prerelease:
+        type: boolean
+        description: Whether to use a prerelease version of Visual Studio.
+        required: false
+        default: false
       solution-path:
         type: string
         description: The path to the solution or project to build.
@@ -128,6 +137,12 @@ jobs:
 
       - name: NuGet Restore
         run: nuget restore ${{ inputs.solution-path }}
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-version: ${{ inputs.vs-version }}
+          vs-prerelease: ${{ inputs.vs-prerelease }}
 
       - name: Build Packages
         run: msbuild ${{ inputs.solution-path }} -c ${{ inputs.build-configuration }} ${{ inputs.build-args }}

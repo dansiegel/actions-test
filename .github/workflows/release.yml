@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    uses: avantipoint/workflow-templates./.github/workflows/dotnet-build.yml
+    uses: avantipoint/workflow-templates./.github/workflows/dotnet-build.yml@master
     with:
       install-workload: maui
       solution-path: SampleLib.sln
@@ -19,7 +19,7 @@ jobs:
       codeSignCertificate: ${{ secrets.CODESIGNCERTIFICATE}}
 
   release:
-    uses: avantipoint/workflow-templates/.github/workflows/generate-release.yml
+    uses: avantipoint/workflow-templates/.github/workflows/generate-release.yml@master
     needs: [build]
     # permissions:
     #   contents: write

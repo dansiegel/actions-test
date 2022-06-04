@@ -18,6 +18,10 @@ jobs:
       checks: write
     with:
       name: Sample Lib
+      dotnet-version: |
+        3.1.x
+        5.0.x
+        6.0.x
       install-workload: maui
       solution-path: SampleLib.sln
       run-tests: true

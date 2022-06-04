@@ -12,13 +12,13 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/dotnet-build.yml
+    uses: avantipoint/workflow-templates/.github/workflows/dotnet-build.yml
     permissions:
       statuses: write
       checks: write
     with:
       name: Sample Lib
-      # install-workload: maui
+      install-workload: maui
       solution-path: SampleLib.sln
       run-tests: true
       code-sign: true

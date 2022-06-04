@@ -9,6 +9,10 @@ on:
     paths-include: [ "SampleLib/**", "SampleLib.Tests/**", ".github/workflows/ci.yml" ]
   workflow_dispatch:
 
+permissions:
+  statuses: write
+  checks: write
+
 jobs:
   build:
     uses: ./.github/workflows/dotnet-build.yml

@@ -145,7 +145,7 @@ jobs:
           vs-prerelease: ${{ inputs.vs-prerelease }}
 
       - name: Build Packages
-        run: msbuild ${{ inputs.solution-path }} -c ${{ inputs.build-configuration }} ${{ inputs.build-args }}
+        run: msbuild ${{ inputs.solution-path }} /p:Configuration=${{ inputs.build-configuration }} ${{ inputs.build-args }}
 
       - name: Run Tests
         if: ${{ inputs.run-tests }}

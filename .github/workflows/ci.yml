@@ -35,3 +35,4 @@ jobs:
       name: XPlatLib
       solution-path: XPlatLib/XPlatLib.csproj
       artifact-name: XPlatLib-NuGet
+      run-tests: false

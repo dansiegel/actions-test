@@ -12,7 +12,6 @@ on:
       dotnet-version:
         type: string
         description: The version of dotnet to use.
-        default: 6.0.x
       install-workload:
         type: string
         description: The name of the workload to install.
@@ -102,6 +101,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup .NET ${{ inputs.dotnet-version }}
+        if: ${{ inputs.dotnet-version }}
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: ${{ inputs.dotnet-version }}

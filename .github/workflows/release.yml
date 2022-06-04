@@ -5,54 +5,23 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/install-dotnet.yml
-    name: Build
-    secrets: inherit
+    uses: avantipoint/workflow-templates./.github/workflows/dotnet-build.yml
+    with:
+      install-workload: maui
+      solution-path: SampleLib.sln
+      run-tests: true
+      code-sign: true
+    secrets:
+      codeSignKeyVault: ${{ secrets.CODESIGNKEYVAULT}}
+      codeSignClientId: ${{ secrets.CODESIGNCLIENTID}}
+      codeSignTenantId: ${{ secrets.CODESIGNTENANTID}}
+      codeSignClientSecret: ${{ secrets.CODESIGNCLIENTSECRET}}
+      codeSignCertificate: ${{ secrets.CODESIGNCERTIFICATE}}
 
   release:
-    runs-on: ubuntu-latest
+    uses: avantipoint/workflow-templates/.github/workflows/generate-release.yml
     needs: [build]
-    name: Release
-    permissions:
-      contents: write
-    outputs:
-      version-name: ${{ steps.process-version.outputs.version-name }}
-      release-display-name: ${{ steps.process-version.outputs.release-display-name }}
-      is-preview: ${{ steps.process-version.outputs.is-preview }}
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        clean: true
-
-    - uses: actions/download-artifact@v2
-      with:
-        name: NuGet
-        path: Artifacts/
-
-    - run: perl ../build/process-version.pl SampleLib
-      shell: bash
-      id: process-version
-      name: Process Version
-      working-directory: Artifacts/
-
-    - uses: ncipollo/release-action@main
-      name: Create Release
-      with:
-        artifacts: "Artifacts/*.nupkg,Artifacts/*.snupkg"
-        artifactErrorsFailBuild: true
-        draft: true
-        generateReleaseNotes: true
-        name: ${{ steps.process-version.outputs.release-display-name }}
-        prerelease: ${{ steps.process-version.outputs.is-preview }}
-        tag: ${{ steps.process-version.outputs.version-name }}
-
-    # - uses: dansiegel/action-automatic-releases@master
-    #   with:
-    #     repo_token: ${{ secrets.GITHUB_TOKEN }}
-    #     automatic_release_tag: ${{ steps.process-version.outputs.version-name }}
-    #     prerelease: ${{ steps.process-version.outputs.is-preview }}
-    #     title: ${{ steps.process-version.outputs.release-display-name }}
-    #     draft: true
-    #     files: |
-    #       Artifacts/*.nupkg
-    #       Artifacts/*.snupkg
+    # permissions:
+    #   contents: write
+    with:
+      package-name: SampleLib

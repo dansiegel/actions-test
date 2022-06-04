@@ -107,11 +107,11 @@ jobs:
           dotnet-version: ${{ inputs.dotnet-version }}
 
       - name: Install .NET Workload
-        if: ${{ inputs.install-workload }} != ''
+        if: (${{ inputs.install-workload }} != '')
         run: dotnet workload install ${{ inputs.install-workload }}
 
       - name: Add NuGet Feed
-        if: ${{ inputs.nugetFeedUrl }} != ''
+        if: (${{ inputs.nugetFeedUrl }} != '')
         shell: pwsh
         run: |
           $userName = "${{ secrets.nugetUserName }}"

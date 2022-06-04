@@ -70,20 +70,19 @@ on:
         required: false
       codeSignKeyVault:
         description: The name of the Azure KeyVault to use.
-        required: ${{ inputs.code-sign }}
+        required: false
       codeSignClientId:
         description: The client id to use to access the KeyVault.
-        required: ${{ inputs.code-sign }}
+        required: false
       codeSignTenantId:
         description: The tenant id to use to access the KeyVault.
-        required: ${{ inputs.code-sign }}
+        required: false
       codeSignClientSecret:
         description: The client secret to use to access the KeyVault.
-        required: ${{ inputs.code-sign }}
+        required: false
       codeSignCertificate:
         description: The name of the certificate to use to code sign the build.
-        required: ${{ inputs.code-sign }}
-
+        required: false
 
 jobs:
   deploy:

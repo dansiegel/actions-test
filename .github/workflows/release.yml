@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    uses: avantipoint/workflow-templates./.github/workflows/dotnet-build.yml@master
+    uses: avantipoint/workflow-templates/.github/workflows/dotnet-build.yml@master
     with:
       install-workload: maui
       solution-path: SampleLib.sln

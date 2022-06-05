@@ -22,7 +22,7 @@ jobs:
   release:
     uses: avantipoint/workflow-templates/.github/workflows/generate-release.yml@master
     needs: [build]
-    # permissions:
-    #   contents: write
+    permissions:
+      contents: write
     with:
       package-name: SampleLib

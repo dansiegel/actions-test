@@ -34,7 +34,7 @@ jobs:
       codeSignCertificate: ${{ secrets.CODESIGNCERTIFICATE}}
 
   classicBuild:
-    uses: ./.github/workflows/msbuild-build.yml
+    uses: avantipoint/workflow-templates/.github/workflows/msbuild-build.yml@master
     with:
       name: XPlatLib
       solution-path: XPlatLib/XPlatLib.csproj

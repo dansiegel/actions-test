@@ -24,4 +24,5 @@ jobs:
     # permissions:
     #   contents: write
     with:
+      name: SampleLib
       package-name: SampleLib

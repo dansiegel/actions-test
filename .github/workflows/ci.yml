@@ -3,12 +3,11 @@ name: Demo Build
 on:
   push:
     branches: [ master ]
-    paths-include: [ "SampleLib/**", "SampleLib.Tests/**", ".github/workflows/ci.yml" ]
+    paths: [ "SampleLib/**", "SampleLib.Tests/**", ".github/workflows/ci.yml" ]
   pull_request:
     branches: [ master ]
-    paths-include: [ "SampleLib/**", "SampleLib.Tests/**", ".github/workflows/ci.yml" ]
+    paths: [ "SampleLib/**", "SampleLib.Tests/**", ".github/workflows/ci.yml" ]
   workflow_dispatch:
-
 
 jobs:
   build:
